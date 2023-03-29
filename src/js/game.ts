@@ -141,8 +141,8 @@ window.onload = () => {
 
 	document.getElementById("random").onclick = () => {
 		cells = []
-		for (let i = 20; i < 70; i+=1) {
-			for (let j = 20; j < 70; j+=1) {
+		for (let i = 15; i < 100; i+=1) {
+			for (let j = 10; j < 60; j+=1) {
 				if (Math.random() < 0.5) {
 					cells.push(new Cell(i, j, true))
 				}

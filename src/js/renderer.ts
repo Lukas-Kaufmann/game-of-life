@@ -8,6 +8,11 @@ export default class Renderer {
 	private cellSize: number
 	private eventOnCell : (x: number, y: number) => void
 
+	private offsetX = 0
+	private offsetY = 0
+
+	private moveStep = 50
+
 
 	private mousedown : boolean
 
@@ -25,6 +30,7 @@ export default class Renderer {
 		let top = rect.top
 
 		const sendEvent = (ev: MouseEvent) => {
+			
 			const x = ev.clientX - left
 			const y = ev.clientY - top
 			eventOnCell(Math.floor(x / cellSize), Math.floor(y / cellSize))
@@ -44,6 +50,22 @@ export default class Renderer {
 				sendEvent(ev)
 			}
 		}
+
+
+		document.addEventListener("keydown", (ev) => {
+			if (ev.key == "ArrowDown") {
+				this.offsetY += this.moveStep
+			}
+			if (ev.key == "ArrowUp") {
+				this.offsetY -= this.moveStep
+			}
+			if (ev.key == "ArrowLeft") {
+				this.offsetX -= this.moveStep
+			}
+			if (ev.key == "ArrowRight") {
+				this.offsetX += this.moveStep
+			}
+		})
 		
 	}
 	//TODO draggedOffset, if we allow to move the screen
@@ -58,7 +80,7 @@ export default class Renderer {
 		this.ctx.fillStyle = "white"
 		for (const cell of cells) {
 			if (cell.alive) {
-				this.ctx.fillRect((cell.x * this.cellSize) + 1, (cell.y * this.cellSize) + 1, this.cellSize - 2, this.cellSize - 2)
+				this.ctx.fillRect((cell.x * this.cellSize) + 1 + this.offsetX, (cell.y * this.cellSize) + 1 + this.offsetY, this.cellSize - 2, this.cellSize - 2)
 				this.ctx.fill()
 			}
 		}
