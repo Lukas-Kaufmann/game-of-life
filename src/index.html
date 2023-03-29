@@ -4,10 +4,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="title" content="TypeScript Game">
 <meta name=”description” content="A simple TypeScript game.">
+<link rel="stylesheet" href="https://cdn.korzh.com/metroui/v4.5.1/css/metro-all.min.css">
 
 <body>
+	<div id="controls">
+
+		<input type="checkbox" data-role="switch" data-caption="Play" data-material="true" id="play" checked>
+		<input type="checkbox" data-role="switch" data-caption="Draw/Erase" data-material="true" id="draw" checked>
+		
+		<div class="form-group">
+			<label for="speed">Speed</label>
+			<input data-role="slider" data-size="200" data-value="30" id="speed" data-return-type="percent">
+		</div>
+
+		<!-- TODO load -->
+		<input type="file" class="small" data-role="file" id="loadFile">
+
+		<button class="button primary mini" id="load">Load</button>
+
+		<button class="button primary mini" id="save">Save</button>
+
+		<button class="button primary mini" id="random">Random</button>
+		
+
+		
+
+		<!-- TODO save -->
+
+	</div>
+
 	<canvas id="canvas"></canvas>
-	<!-- TODO control elements -->
+
+	<script src="https://cdn.korzh.com/metroui/v4/js/metro.min.js"></script>
 </body>
 
 </html>

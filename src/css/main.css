@@ -10,3 +10,18 @@ html, body {
 canvas {
 	-webkit-tap-highlight-color: transparent;
 }
+
+
+#controls {
+	position: fixed;
+	top: 0px;
+	right: 0px;
+
+	background-color: white;
+
+	border-radius: 8px;
+
+	padding: 10px;
+}
+
+
