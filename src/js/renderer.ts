@@ -13,9 +13,7 @@ export default class Renderer {
 
 	private moveStep = 50
 
-
 	private mousedown : boolean
-
 
 	constructor(cellSize: number, eventOnCell : (x: number, y: number) => void ) {
 		this.canvas = <HTMLCanvasElement>document.getElementById('canvas');
@@ -31,8 +29,8 @@ export default class Renderer {
 
 		const sendEvent = (ev: MouseEvent) => {
 			
-			const x = ev.clientX - left
-			const y = ev.clientY - top
+			const x = (ev.clientX - left) - this.offsetX
+			const y = (ev.clientY - top) - this.offsetY
 			eventOnCell(Math.floor(x / cellSize), Math.floor(y / cellSize))
 		}
 

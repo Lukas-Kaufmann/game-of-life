@@ -27,7 +27,7 @@ let drawing = true
 let interval = 200
 
 function start(renderer : Renderer) : void {
-	// Any setup that is required that only runs once before game loads goes here
+
 
 	const runRender = () => {
 		renderer.render(cells)
