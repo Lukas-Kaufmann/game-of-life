@@ -18,4 +18,6 @@ The game of life will be available on localhost:8080
 
 The simulation can be controlled with the controls in the top right. The state can be manually be changed by pressing the mouse. Moving the mouse while pressed also changes the cells.
 
+State of the simulation can be saved to file and loaded again. Some example patterns have been provided in [samples](./samples/)
+
 The universe can be moved relative to the screen with the arrow keys.

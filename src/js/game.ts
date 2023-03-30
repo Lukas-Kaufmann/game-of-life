@@ -20,6 +20,7 @@ const neighboursOffsets = [
 
 //state
 let cells: Cell[] = []
+let stats: {alive: number, total: number}[] = []
 
 let playing = true
 let drawing = true
@@ -40,6 +41,11 @@ function start(renderer : Renderer) : void {
 function gameLoop(): void {
 	if (playing) {
 		addDeadNeighbours()
+
+		stats.push({
+			total: cells.length,
+			alive: cells.filter(c => c.alive).length
+		})
 
 		cells.map((c) => {
 			let count = neighboursOffsets.map(({x, y}) => cells.find((nCell) => nCell.x == c.x + x && nCell.y == c.y + y)).filter(c => c != undefined && c.alive).length
@@ -123,14 +129,14 @@ window.onload = () => {
 			var reader = new FileReader();
 			reader.readAsText(file, "UTF-8");
 			reader.onload = function (evt) {
-				let loadedCells = JSON.parse(evt.target.result as string) as Cell[]
+				let loadedCells = (JSON.parse(evt.target.result as string) as {x:number, y:number}[]).map(c => {return new Cell(c.x, c.y, true)})
 				cells = loadedCells
 			}
 		}
 	}
 
 	document.getElementById("save").onclick = () => {
-		var fileContent = JSON.stringify(cells.filter((c) => c.alive))
+		var fileContent = JSON.stringify(cells.filter((c) => c.alive).map(c => {return {x : c.x, y : c.y}}))
 		var bb = new Blob([fileContent ], { type: 'application/json' });
 		var a = document.createElement('a');
 		a.download = 'state.json';
@@ -148,6 +154,10 @@ window.onload = () => {
 				}
 			}
 		}
+	}
+	document.getElementById("reset").onclick = () => {
+		cells = []
+		//TODO reset state
 	}
 	
 	
