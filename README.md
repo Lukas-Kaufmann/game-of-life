@@ -21,3 +21,43 @@ The simulation can be controlled with the controls in the top right. The state c
 State of the simulation can be saved to file and loaded again. Some example patterns have been provided in [samples](./samples/)
 
 The universe can be moved relative to the screen with the arrow keys.
+
+
+## Features
+
+### Start/Stop
+
+Start and stop the simulation by toggling the switch labeled `Play`
+
+### Draw/Erase
+
+The world can be edited by pressing the mouse and moving over the cells you want to change. Switch between creating live and dead cells by toggling the switch labeled `Draw/Erase`
+
+### Speed Control
+
+The speed of the simulation can be changed using the slider.
+
+### Save state
+
+Save the state using the button `save`. This will produce a json file `state.json`.
+
+### Load state
+
+Load a previously saved state, by selecting the file at `Choose file` then pressing `Load`. This assumes the file is valid.
+
+### Random state
+
+By pressing `random` a 50 by 75 cells area will randomly filled with cells.
+
+### Reset
+
+Pressing `reset` will kill all the cells.
+
+### Moving
+
+Using the arrow keys the current view on the world can be moved.
+
+
+## [Screenshot](./img/screenshot.png)
+#### of grid and controls
+

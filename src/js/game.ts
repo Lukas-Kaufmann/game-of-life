@@ -28,7 +28,6 @@ let interval = 200
 
 function start(renderer : Renderer) : void {
 
-
 	const runRender = () => {
 		renderer.render(cells)
 		window.requestAnimationFrame(runRender)
@@ -38,14 +37,27 @@ function start(renderer : Renderer) : void {
 	gameLoop()
 }
 
+let aliveCount = 0
+
+let stateElem = document.getElementById("state")
+
+function setState(count: number) {
+	if (aliveCount != count) {
+		stateElem.innerText = "changing"
+	} else if (count == 0) {
+		stateElem.innerText = "dead"
+	} else {
+		stateElem.innerText = "static"
+	}
+
+	aliveCount = count
+}
+
 function gameLoop(): void {
 	if (playing) {
 		addDeadNeighbours()
 
-		stats.push({
-			total: cells.length,
-			alive: cells.filter(c => c.alive).length
-		})
+		setState(cells.filter(c => c.alive).length)
 
 		cells.map((c) => {
 			let count = neighboursOffsets.map(({x, y}) => cells.find((nCell) => nCell.x == c.x + x && nCell.y == c.y + y)).filter(c => c != undefined && c.alive).length
@@ -73,6 +85,7 @@ function gameLoop(): void {
 	setTimeout(gameLoop, interval)
 }
 
+
 function addDeadNeighbours() {
 	for (const cell of cells.filter((c) => c.alive)) {
 		for (const offset of neighboursOffsets) {
@@ -98,13 +111,12 @@ function handleCellEvent(x : number, y: number) {
 }
 
 const MAX_INTERVAL = 5000
-const MIN_INTERVAL = 50
+const MIN_INTERVAL = 1
 
 function toInterval(perc : number) : number {
 	let delta = MAX_INTERVAL - MIN_INTERVAL
 
 	return (1/perc * delta) + MIN_INTERVAL
-	
 }
 
 window.onload = () => {
@@ -129,8 +141,7 @@ window.onload = () => {
 			var reader = new FileReader();
 			reader.readAsText(file, "UTF-8");
 			reader.onload = function (evt) {
-				let loadedCells = (JSON.parse(evt.target.result as string) as {x:number, y:number}[]).map(c => {return new Cell(c.x, c.y, true)})
-				cells = loadedCells
+				cells = (JSON.parse(evt.target.result as string) as {x:number, y:number}[]).map(c => {return new Cell(c.x, c.y, true)})
 			}
 		}
 	}
